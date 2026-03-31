@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "outline-variant": "#484848",
+              "tertiary-container": "#fc4c00",
+              "on-secondary-fixed-variant": "#5a5c5c",
+              "on-background": "#e7e5e4",
+              "primary": "#c6c6c7",
+              "surface-bright": "#2c2c2c",
+              "outline": "#767575",
+              "primary-dim": "#b8b9b9",
+              "tertiary": "#ff7346",
+              "on-tertiary-container": "#0e0100",
+              "background": "#0e0e0e",
+              "surface-container-highest": "#252626",
+              "on-surface-variant": "#acabaa",
+              "on-primary": "#3f4041",
+              "surface-variant": "#252626",
+              "tertiary-fixed": "#fc4c00",
+              "secondary-fixed-dim": "#d4d4d4",
+              "on-tertiary": "#420d00",
+              "secondary-fixed": "#e2e2e2",
+              "inverse-surface": "#fcf8f8",
+              "on-tertiary-fixed": "#000000",
+              "inverse-primary": "#5e5f60",
+              "secondary-container": "#3a3c3c",
+              "surface-dim": "#0e0e0e",
+              "error-container": "#7f2927",
+              "error": "#ee7d77",
+              "surface-container": "#191a1a",
+              "inverse-on-surface": "#565554",
+              "surface-tint": "#c6c6c7",
+              "error-dim": "#bb5551",
+              "surface": "#0e0e0e",
+              "on-error-container": "#ff9993",
+              "primary-fixed": "#e2e2e2",
+              "secondary": "#9d9e9e",
+              "on-tertiary-fixed-variant": "#2e0700",
+              "on-primary-fixed": "#3e4040",
+              "on-primary-container": "#d0d0d0",
+              "surface-container-lowest": "#000000",
+              "surface-container-high": "#1f2020",
+              "on-error": "#490106",
+              "on-secondary-container": "#bfbfbf",
+              "primary-fixed-dim": "#d4d4d4",
+              "secondary-dim": "#9d9e9e",
+              "on-primary-fixed-variant": "#5a5c5c",
+              "on-surface": "#e7e5e4",
+              "surface-container-low": "#131313",
+              "on-secondary-fixed": "#3e4040",
+              "tertiary-dim": "#ff7346",
+              "primary-container": "#454747",
+              "tertiary-fixed-dim": "#e64500",
+              "on-secondary": "#1f2021"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Manrope"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0e0e0e;
+            color: #e7e5e4;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(37, 38, 38, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .grain-overlay {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        .mesh-gradient {
+            background: radial-gradient(at 0% 0%, #0e0e0e 0%, transparent 50%),
+                        radial-gradient(at 100% 0%, #131313 0%, transparent 50%),
+                        radial-gradient(at 100% 100%, #191a1a 0%, transparent 50%),
+                        radial-gradient(at 0% 100%, #0e0e0e 0%, transparent 50%);
+        }
+        .text-stroke {
+            -webkit-text-stroke: 2px rgba(231, 229, 228, 0.4);
+            color: transparent;
+        }
+        .custom-cursor {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 115, 70, 0.2);
+            backdrop-filter: difference;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+        }
+        .portrait-mask {
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%), 
+                        linear-gradient(to right, black 85%, transparent 100%),
+                        linear-gradient(to left, black 85%, transparent 100%);
+            mask-composite: intersect;
+            -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%), 
+                                linear-gradient(to right, black 85%, transparent 100%),
+                                linear-gradient(to left, black 85%, transparent 100%);
+            -webkit-mask-composite: source-in;
+        }
+    </style>
+</head>
+<body class="font-body selection:bg-tertiary selection:text-on-tertiary">
+<div class="grain-overlay fixed inset-0 z-[100]"></div>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-[#0e0e0e]/80 backdrop-blur-xl">
+<nav class="flex justify-between items-center px-8 py-6 max-w-full mx-auto">
+<div class="text-xl font-black tracking-tighter text-[#e7e5e4] font-inter uppercase">
+                CURATOR.EXE
+            </div>
+<div class="hidden md:flex items-center space-x-12">
+<a class="font-inter tracking-tight font-bold uppercase text-[#ff7346] border-b-2 border-[#ff7346] pb-1" href="#">Work</a>
+<a class="font-inter tracking-tight font-bold uppercase text-[#e7e5e4]/60 hover:text-[#e7e5e4] transition-colors duration-300" href="#">Process</a>
+<a class="font-inter tracking-tight font-bold uppercase text-[#e7e5e4]/60 hover:text-[#e7e5e4] transition-colors duration-300" href="#">About</a>
+<a class="font-inter tracking-tight font-bold uppercase text-[#e7e5e4]/60 hover:text-[#e7e5e4] transition-colors duration-300" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#e7e5e4] hover:text-[#ff7346] transition-all duration-300" data-icon="grid_view">grid_view</button>
+</div>
+</nav>
+</header>
+<!-- SideNavBar (Socials) -->
+<aside class="fixed left-6 top-1/2 -translate-y-1/2 z-40 flex flex-col space-y-12 items-center bg-transparent">
+<div class="rotate-90 origin-left flex flex-col space-y-12 items-center">
+<a class="font-manrope text-[10px] tracking-[0.2em] uppercase text-[#e7e5e4]/30 hover:text-[#ff7346] hover:scale-125 transition-transform duration-500" href="#">Instagram</a>
+<a class="font-manrope text-[10px] tracking-[0.2em] uppercase text-[#e7e5e4]/30 hover:text-[#ff7346] hover:scale-125 transition-transform duration-500" href="#">LinkedIn</a>
+<a class="font-manrope text-[10px] tracking-[0.2em] uppercase text-[#e7e5e4]/30 hover:text-[#ff7346] hover:scale-125 transition-transform duration-500" href="#">GitHub</a>
+<a class="font-manrope text-[10px] tracking-[0.2em] uppercase text-[#e7e5e4]/30 hover:text-[#ff7346] hover:scale-125 transition-transform duration-500" href="#">Dribbble</a>
+</div>
+</aside>
+<main class="mesh-gradient">
+<!-- Hero Section Refined -->
+<section class="relative min-h-screen flex items-center justify-center px-8 pt-20 overflow-hidden">
+<!-- Background Decorative Text / Mesh -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+<div class="w-full h-full bg-[radial-gradient(circle_at_50%_50%,_rgba(255,115,70,0.05),transparent_70%)]"></div>
+</div>
+<div class="container mx-auto relative z-10 flex flex-col items-center">
+<!-- Large Centered Typography -->
+<div class="relative w-full text-center z-0">
+<h1 class="flex flex-col items-center justify-center text-[12vw] md:text-[18vw] font-black font-headline leading-[0.85] tracking-tighter uppercase select-none">
+<span class="text-on-surface">DIGITAL</span>
+<span class="text-stroke">ARTISAN</span>
+</h1>
+</div>
+<!-- Overlapping Portrait -->
+<div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+<div class="relative w-full max-w-4xl h-[85vh] portrait-mask mt-10">
+<img alt="Professional portrait" class="w-full h-full object-cover grayscale pointer-events-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9Sf81N4HspDa9687DscGtYzydx8aTIdO9bxjxJXqw3kSk79iuJqheii8lh5Y_8g-XkDJ8i_p3purVnku_LDsKqfbDjZI-lfuvK0lViwIfxFZe0Cf3sTq23fK_8JXgREEVBPgoMxBxDDQXr7-nHj_POS05942TcjpEKUjTaIJP9AKSQ9id96VEPA0WUx4WqPCq27bMzWu5MAsYo0DhHfUsTkou737ChUTwJEVY4JkPruwfrGmur7FBh3crmVELis71FLXjDZ99gwp4"/>
+<!-- Floating Glassmorphic Elements -->
+<div class="absolute top-1/4 -right-12 pointer-events-auto">
+<div class="glass-card p-6 rounded-2xl border border-white/10 shadow-2xl backdrop-blur-3xl animate-pulse">
+<span class="text-4xl font-black font-headline text-tertiary">ST</span>
+</div>
+</div>
+<div class="absolute bottom-1/3 -left-8 pointer-events-auto hidden md:block">
+<div class="glass-card px-4 py-2 rounded-full border border-white/10 shadow-xl backdrop-blur-2xl">
+<span class="font-label text-[10px] tracking-[0.2rem] uppercase font-bold text-on-surface">PORTFOLIO_V1.0</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Subtitle & CTA (Lower Z-index but visible) -->
+<div class="relative z-20 mt-[-5vh] flex flex-col items-center space-y-8 max-w-2xl text-center">
+<p class="text-on-surface-variant text-lg font-body leading-relaxed md:bg-background/20 md:backdrop-blur-sm px-6 py-2 rounded-lg">
+                        Synthesizing raw code into high-fidelity digital experiences. Where performance architecture meets hyper-tactile visual direction.
+                    </p>
+<div class="flex gap-6">
+<button class="rounded-full bg-primary px-10 py-4 text-on-primary font-bold hover:scale-105 transition-transform duration-300 shadow-[0_0_30px_rgba(255,255,255,0.1)]">EXPLORE WORK</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Projects Grid -->
+<section class="py-32 px-8">
+<div class="container mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+<div>
+<span class="font-label text-[10px] tracking-[0.3em] uppercase text-tertiary mb-4 block">SELECTED ARCHIVE</span>
+<h2 class="text-4xl md:text-6xl font-black font-headline tracking-tighter">CURATED<br/> PROJECTS</h2>
+</div>
+<p class="max-w-xs text-on-surface-variant text-sm font-body border-l border-tertiary/30 pl-6">
+                        A collection of high-performance interfaces designed for precision and tactile response.
+                    </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Project Card 1 -->
+<div class="glass-card group relative aspect-[3/4] rounded-xl overflow-hidden border border-outline-variant/10 flex flex-col p-8 transition-all duration-500 hover:-translate-y-2">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-700" data-alt="Abstract 3D liquid metal shapes flowing in a dark void with neon orange highlights and crystalline textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtUYmH0DVD39XqcgVFYKLF6C0uiBVg6bhbIzSvVSvMnvZog-eKYv9k-ugPAfqXZgGsycx87ygk5KuU1sjeAmkneSiLPYrPkoU7NhYrUWjt1ca0zvBxuYaUS_GyjM6bbACVb0zGmWdGILEx3HBR_YOhsTseFc6KomDVK0DLfSMBBjFbW2ZZPccd59JK2MyIXqqGJGjApSRoowB7UbRmK8C8dnavQL9YbFAE5tU6oF11ZnW2oBZ1Px1tj0m7F-0K3ZjZSVezE6Fv4qVf"/>
+</div>
+<div class="relative z-10 mt-auto">
+<span class="text-[10px] tracking-widest text-tertiary uppercase font-bold mb-2 block">Case Study / 01</span>
+<h3 class="text-3xl font-bold font-headline mb-4 tracking-tight">KINETIC.CORE</h3>
+<p class="text-sm text-on-surface-variant mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                Real-time data visualization engine for high-frequency trading platforms.
+                            </p>
+<a class="inline-flex items-center gap-2 text-on-surface font-bold text-xs uppercase tracking-widest group-hover:text-tertiary transition-colors" href="#">
+                                View Case <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Project Card 2 -->
+<div class="glass-card group relative aspect-[3/4] rounded-xl overflow-hidden border border-outline-variant/10 flex flex-col p-8 transition-all duration-500 hover:-translate-y-2 md:mt-24">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-700" data-alt="Minimalist monochromatic interface design floating in a dark studio setting with soft depth of field and premium lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQN5OBdVPtPqLpPKUBib6N4LozRTlYudX-bNzBBcdkljycDYMJEiRc6g_VrBJA5LG3d_sTGvjlC3OupVPAfY3AX1aUySKPk1CnZVxwlcSHdsUuFWJu_GgFX5JQvj7-TQrop-hxzf3ZJTJ5hlMvO39OmVzTLO5G1BtCSzcs_ormBXz-52C0X122Xjp6O3kK0k87KKq3cn05_u3NBfQ2MjtsIwkifmAp_zOA39rIwQ_F_Cpz6pCMDqkFsDoOe-zqSpxw_7icYHRrwn78"/>
+</div>
+<div class="relative z-10 mt-auto">
+<span class="text-[10px] tracking-widest text-tertiary uppercase font-bold mb-2 block">Mobile / 02</span>
+<h3 class="text-3xl font-bold font-headline mb-4 tracking-tight">NEURAL.OS</h3>
+<p class="text-sm text-on-surface-variant mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                A gesture-based operating system concept for futuristic spatial computing.
+                            </p>
+<a class="inline-flex items-center gap-2 text-on-surface font-bold text-xs uppercase tracking-widest group-hover:text-tertiary transition-colors" href="#">
+                                View Case <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Project Card 3 -->
+<div class="glass-card group relative aspect-[3/4] rounded-xl overflow-hidden border border-outline-variant/10 flex flex-col p-8 transition-all duration-500 hover:-translate-y-2">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-700" data-alt="Hyper-modern laboratory equipment with glowing digital displays and carbon fiber textures in a moody dark environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-nQzXhH-18yUY5zz5pFnIXPOSkAvQ7TZ0IEVY397VV75zckOxy9pO4Ye1Ylh3yPlFTh5TPdcHQEuy2Trju3l-0NQBT2c98Alf01-piA5o5CJRlHGLvj9PryRPusVnBdeJYatPyOhW9x26InNTlkNQL9ep4TjSpQW-DE_z954a1JjloD-GK21TPrufdu8_pEpucCTPVpqmhOSOv4uSYhHzo2-nhEhjUx6CbI2hsacI6iFCfhJ6jUg-uJdJ1yrb6Fxwx9Q9j8e1TvjM"/>
+</div>
+<div class="relative z-10 mt-auto">
+<span class="text-[10px] tracking-widest text-tertiary uppercase font-bold mb-2 block">Web / 03</span>
+<h3 class="text-3xl font-bold font-headline mb-4 tracking-tight">SILK.PROTOCOL</h3>
+<p class="text-sm text-on-surface-variant mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                Decentralized identity management with high-fidelity encryption visuals.
+                            </p>
+<a class="inline-flex items-center gap-2 text-on-surface font-bold text-xs uppercase tracking-widest group-hover:text-tertiary transition-colors" href="#">
+                                View Case <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- About / High-Performance Lab -->
+<section class="py-32 bg-surface-container-low/50 relative">
+<div class="container mx-auto px-8 grid grid-cols-12 gap-12 items-center">
+<div class="col-span-12 lg:col-span-6 order-2 lg:order-1">
+<div class="relative rounded-xl overflow-hidden aspect-video border border-outline-variant/20 shadow-2xl">
+<img alt="Dev workstation" class="w-full h-full object-cover grayscale" data-alt="Sophisticated workstation in a dark minimalist studio with high-end monitors, ambient orange backlighting, and clean cable management" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMyAP-EUKr_6ZfuGYgCbO2MkjVoZK473aSVJS6cvy7nC1RpdYPdw3bMCCoBugnvjYzyUTKr-GHvlRW7-i4A5uemNauKNu-E-RoF5UdqOFBPIkL3dLFD0fH71c3lriOYfzd897QeG--qCEuEuMm5wjglpTZIrCHY_gHt2AiB9bMlLji7q4iUxbX2cmAvtWn4ZfekvCI-BcJHShEsrgPlTAhgY8ocORBzX01-ApvI7C3zZSz-uU7j7Jbz2xlKMJxQXX-6J3TBf90S87H"/>
+<div class="absolute inset-0 glass-card opacity-20"></div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-6 order-1 lg:order-2 space-y-8">
+<span class="font-label text-[10px] tracking-[0.3em] uppercase text-tertiary">PHILOSOPHY</span>
+<h2 class="text-5xl font-black font-headline tracking-tighter">THE LAB MINDSET.</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed">
+                        Every pixel is a component of a larger machine. My process treats UI design as high-performance engineering, ensuring that aesthetic elegance never compromises technical integrity.
+                    </p>
+<div class="grid grid-cols-2 gap-8 pt-6">
+<div class="space-y-2">
+<span class="text-2xl font-bold font-headline text-on-surface">99.9%</span>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant">Uptime Precision</p>
+</div>
+<div class="space-y-2">
+<span class="text-2xl font-bold font-headline text-on-surface">120FPS</span>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant">Visual Smoothness</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full py-12 px-8 mt-20 bg-[#0e0e0e]">
+<div class="flex flex-col md:flex-row justify-between items-center gap-8 w-full border-t border-[#e7e5e4]/10 pt-8">
+<div class="text-sm font-bold font-headline tracking-tighter text-[#e7e5e4] uppercase">
+                    CURATOR.EXE
+                </div>
+<div class="flex items-center gap-12">
+<a class="font-manrope text-[10px] tracking-widest font-medium uppercase text-[#e7e5e4]/40 hover:text-[#e7e5e4] transition-colors" href="#">Privacy</a>
+<a class="font-manrope text-[10px] tracking-widest font-medium uppercase text-[#e7e5e4]/40 hover:text-[#e7e5e4] transition-colors" href="#">Terms</a>
+<a class="font-manrope text-[10px] tracking-widest font-medium uppercase text-[#e7e5e4]/40 hover:text-[#e7e5e4] transition-colors" href="#">Archive</a>
+</div>
+<div class="font-manrope text-[10px] tracking-widest font-medium uppercase text-[#e7e5e4]/40">
+                    © 2024 HYPER-TACTILE CURATOR. ALL RIGHTS RESERVED.
+                </div>
+</div>
+</footer>
+</main>
+<!-- Scroll Indicator -->
+<div class="fixed bottom-12 left-1/2 -translate-x-1/2 z-50">
+<div class="w-12 h-12 rounded-full border border-tertiary flex items-center justify-center text-tertiary animate-bounce bg-background/50 backdrop-blur-md">
+<span class="material-symbols-outlined" data-icon="south">south</span>
+</div>
+</div>
+<!-- Custom Cursor Effect -->
+<div class="custom-cursor hidden md:block" id="cursor"></div>
+<script>
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+    </script>
+</body></html>
