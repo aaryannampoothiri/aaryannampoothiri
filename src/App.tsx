@@ -34,13 +34,19 @@ function App() {
 
   const handleNext = () => {
     if (!transitionEnabled) return;
-    setCurrentQuoteIndex((prev) => prev + 1);
+    setCurrentQuoteIndex((prev) => {
+      if (prev >= displayQuotes.length - 1) return prev;
+      return prev + 1;
+    });
     resetTimer();
   };
 
   const handlePrev = () => {
     if (!transitionEnabled) return;
-    setCurrentQuoteIndex((prev) => prev - 1);
+    setCurrentQuoteIndex((prev) => {
+      if (prev <= 0) return prev;
+      return prev - 1;
+    });
     resetTimer();
   };
 
@@ -57,11 +63,15 @@ function App() {
   };
 
   useEffect(() => {
-    resetTimer();
+    if (currentView === 'home') {
+      resetTimer();
+    } else {
+      if (timerRef.current) clearInterval(timerRef.current);
+    }
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, []);
+  }, [currentView]);
 
   const handleNavigate = (view: 'home' | 'projects' | 'about', anchor?: string) => {
     setCurrentView(view);
