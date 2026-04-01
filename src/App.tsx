@@ -491,8 +491,8 @@ function HomeView({
         <div className="container mx-auto relative z-10 flex flex-col items-center">
           <div className="relative w-full text-center z-0 mt-12 md:mt-20">
             <h1 className="flex flex-col items-center justify-center text-[7.5vw] md:text-[6.5vw] font-syne font-black leading-[0.85] tracking-tighter uppercase select-none w-full whitespace-nowrap overflow-hidden">
-              <span className="text-on-surface reveal-on-scroll reveal-delay-100 -z-10">AARYAN</span>
-              <span className="text-stroke reveal-on-scroll reveal-delay-200 -z-10">NAMPOOTHIRI</span>
+              <span className="text-on-surface reveal-on-scroll reveal-delay-100 relative z-20 md:-z-10">AARYAN</span>
+              <span className="text-stroke reveal-on-scroll reveal-delay-200 relative z-20 md:-z-10">NAMPOOTHIRI</span>
             </h1>
           </div>
           <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none reveal-on-scroll pt-20 md:pt-16">
@@ -500,8 +500,8 @@ function HomeView({
               <img alt="Aaryan's professional portrait" className="w-full h-full object-cover object-top grayscale pointer-events-auto scale-x-[-1]" src="/potrait.png"/>
             </div>
           </div>
-          <div className="relative z-20 mt-24 md:mt-56 w-full flex flex-col md:flex-row items-center justify-between gap-12 px-8 max-w-7xl mx-auto">
-            <div className="flex-1 flex justify-start -ml-8 md:-ml-20">
+          <div className="relative z-20 mt-[45vh] md:mt-56 w-full flex flex-col md:flex-row items-center justify-between gap-12 px-8 max-w-7xl mx-auto">
+            <div className="flex-1 flex justify-start -ml-8 md:-ml-20 z-20">
               <p className="text-left text-[#ff7346] text-base md:text-lg font-body leading-relaxed font-bold md:bg-background/20 md:backdrop-blur-sm px-6 py-4 rounded-lg reveal-on-scroll reveal-delay-300 max-w-sm border-l-2 border-[#ff7346]/30">
                 Translating complex logic into tactile digital space. Where clean architecture meets fluid motion.
               </p>
