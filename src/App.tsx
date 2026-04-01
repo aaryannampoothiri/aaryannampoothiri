@@ -255,7 +255,6 @@ function App() {
             handleNavigate={handleNavigate} 
             projects={projects.slice(0, 3)}
             setSelectedProject={setSelectedProject}
-            quotes={quotes}
             currentQuoteIndex={currentQuoteIndex}
             transitionEnabled={transitionEnabled}
             handleNext={handleNext}
@@ -267,7 +266,6 @@ function App() {
           <ProjectsView 
             projects={projects} 
             setSelectedProject={setSelectedProject} 
-            handleNavigate={handleNavigate} 
           />
         ) : (
           <AboutView />
@@ -457,7 +455,6 @@ function HomeView({
   handleNavigate, 
   projects, 
   setSelectedProject,
-  quotes,
   currentQuoteIndex,
   transitionEnabled,
   handleNext,
@@ -468,7 +465,6 @@ function HomeView({
   handleNavigate: any, 
   projects: any[], 
   setSelectedProject: any,
-  quotes: any[],
   currentQuoteIndex: number,
   transitionEnabled: boolean,
   handleNext: () => void,
@@ -709,7 +705,7 @@ function AboutView() {
   );
 }
 
-function ProjectsView({ projects, setSelectedProject, handleNavigate }: { projects: any[], setSelectedProject: any, handleNavigate: any }) {
+function ProjectsView({ projects, setSelectedProject }: { projects: any[], setSelectedProject: any }) {
   return (
     <div className="animate-fade-in pt-40 md:pt-60 pb-32">
       <div className="container mx-auto px-8">
@@ -718,7 +714,7 @@ function ProjectsView({ projects, setSelectedProject, handleNavigate }: { projec
           <h1 className="text-5xl md:text-8xl font-black font-headline tracking-tighter uppercase leading-[0.8]">DEDICATED<br/>COLLECTION</h1>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {projects.map((project, index) => (
+          {projects.map((project) => (
             <div 
               key={project.id}
               onClick={() => setSelectedProject(project)}
